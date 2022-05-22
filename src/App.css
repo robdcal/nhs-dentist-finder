@@ -1,38 +1,126 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  background: #f857a6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #ff5858,
+    #f857a6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #ff5858,
+    #f857a6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
   min-height: 100vh;
+}
+
+h1 {
+  font-size: 5rem;
+  line-height: 5rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 3rem;
+  line-height: 3rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 2rem;
+  line-height: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.App {
+  max-width: 960px;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+.hero {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* height: 100vh; */
+  text-align: center;
+  transition: all 0.5s ease-in;
+}
+
+.hero h1 {
+  /* font-size: 4rem; */
+}
+
+.hero p {
+  margin-bottom: 4rem;
+}
+
+form input,
+form button {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border: none;
+  background: white;
+}
+
+form input {
+  /* border-radius: 0.5rem 0 0 0.5rem; */
+  min-width: 40%;
+}
+
+form button {
   color: white;
+  background: black;
+  cursor: pointer;
+  /* border-radius: 0 0.5rem 0.5rem 0; */
+  transition: all 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+form button:hover {
+  background: white;
+  color: black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+p.error {
+  margin: 0.5rem 0 0 0;
+  font-weight: 500;
+  color: rgb(182, 0, 0);
+}
+
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+  border-top: 2px solid rgba(255, 255, 255, 0.5);
+  margin-bottom: 4rem;
+}
+
+table tr {
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+table tr:nth-of-type(1) {
+  border-top: none;
+}
+
+table td {
+  word-wrap: break-word;
+  padding: 0.5rem 0;
+}
+
+table td:nth-of-type(1) {
+  width: 25%;
+  font-weight: 600;
+}
+table td:nth-of-type(2) {
+  padding-left: 1rem;
 }
