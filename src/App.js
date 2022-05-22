@@ -4,6 +4,7 @@ import { PostcodeInput } from "./components/PostcodeInput";
 
 function App() {
   const [postcode, setPostcode] = useState("");
+  const [dentists, setDentists] = useState([]);
   const [active, setActive] = useState(false);
   const [error, setError] = useState("");
 
@@ -14,14 +15,13 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // try {
-    //   const url = new URL(Url);
-    //   dispatchDeconstructor(url);
-    //   setActive(true);
-    // } catch (error) {
-    //   setError("Please enter a valid URL.");
-    //   setActive(false);
-    // }
+    try {
+      getDentists();
+      setActive(true);
+    } catch (error) {
+      setError("Please enter a valid URL.");
+      setActive(false);
+    }
   };
 
   const getGeolocation = () => {
@@ -35,6 +35,22 @@ function App() {
         });
     });
   };
+
+  const getDentists = () => {
+    fetch(`http://localhost:8888/.netlify/functions/nhs-dentists`)
+      .then((response) => response.json())
+      .then((data) => {
+        setDentists(data.dentistsList);
+      });
+  };
+
+  const availableDentists = dentists.filter(
+    (dentist) => dentist.availability === "Yes"
+  );
+
+  const dentistsList = availableDentists.map((dentist, index) => (
+    <li key={index}>{dentist.name}</li>
+  ));
 
   const headerStyling = {
     minHeight: active ? "40vh" : "100vh",
@@ -56,6 +72,7 @@ function App() {
           error={error}
           getGeolocation={getGeolocation}
         />
+        <ul>{dentistsList}</ul>
       </header>
     </div>
   );
