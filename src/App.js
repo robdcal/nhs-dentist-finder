@@ -1,6 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { PostcodeInput } from "./components/PostcodeInput";
+import { DentistsList } from "./components/DentistsList";
 
 function App() {
   const [postcode, setPostcode] = useState("");
@@ -21,7 +22,7 @@ function App() {
       getDentists();
       setActive(true);
     } catch (error) {
-      setError("Please enter a valid URL.");
+      setError("Please enter a valid postcode.");
       setActive(false);
     }
   };
@@ -79,10 +80,6 @@ function App() {
     (dentist) => dentist.availability === "Yes"
   );
 
-  const dentistsList = availableDentists.map((dentist, index) => (
-    <li key={index}>{dentist.name}</li>
-  ));
-
   const headerStyling = {
     minHeight: active ? "40vh" : "100vh",
     margin: active ? "4rem 0" : "0",
@@ -103,7 +100,7 @@ function App() {
           error={error}
           getGeolocation={getGeolocation}
         />
-        <ul>{dentistsList}</ul>
+        <DentistsList availableDentists={availableDentists} />
       </header>
     </div>
   );
