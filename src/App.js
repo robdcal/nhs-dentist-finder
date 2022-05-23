@@ -37,7 +37,7 @@ function App() {
   };
 
   const getDentists = () => {
-    fetch(`http://localhost:8888/.netlify/functions/nhs-dentists`)
+    fetch(`http://localhost:8888/.netlify/functions/scrape-dentists`)
       .then((response) => response.json())
       .then((data) => {
         setDentists(data.dentistsList);
