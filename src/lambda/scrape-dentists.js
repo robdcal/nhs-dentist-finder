@@ -15,7 +15,7 @@ exports.handler = async function (event, context) {
     const lat = event.queryStringParameters.lat
     const lng = event.queryStringParameters.lng
 
-    await page.goto(`https://www.nhs.uk/service-search/other-services/Dentists/${postcode}/Results/12/${lng}/${lat}/3/0?distance=25&ResultsOnPageValue=50&isNational=0`);
+    await page.goto(`https://www.nhs.uk/service-search/other-services/Dentists/${postcode}/Results/12/${lng}/${lat}/3/0?distance=50&ResultsOnPageValue=50&isNational=0`);
 
     const dentistNames = await page.$$eval('tr th.fctitle', (dentists) => {
         return dentists.map(dentist => dentist.innerText);
