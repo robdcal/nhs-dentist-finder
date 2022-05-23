@@ -15,5 +15,7 @@ This project is designed to improve upon that experience, making it easier to fi
 ## Todo
 
 - ~~Bring serverless function into the main project~~
-- Make postcode in URL dynamic (pull from input field)
-- get & display more information
+- ~~Make postcode in URL dynamic (pull from input field)~~
+- ~~get & display distance~~
+- improve 'active' animation (animate when dentist list displayed)
+- Debounce postcode input & lat/lng API calls
