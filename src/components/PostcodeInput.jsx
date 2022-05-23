@@ -7,10 +7,10 @@ export const PostcodeInput = ({
 }) => {
   return (
     <div>
+      {"geolocation" in navigator ? (
+        <button onClick={getGeolocation}>Geolocate</button>
+      ) : null}
       <form action="submit" onSubmit={handleSubmit}>
-        {"geolocation" in navigator ? (
-          <button onClick={getGeolocation}>Geolocate</button>
-        ) : null}
         <input
           type="text"
           placeholder="Enter postcode"
