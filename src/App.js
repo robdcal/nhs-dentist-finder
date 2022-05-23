@@ -90,8 +90,8 @@ function App() {
       <header className="hero" style={headerStyling}>
         <h1>NHS Dentist Finder</h1>
         <p>
-          Either manually enter your postcode or use Geolocation to
-          automatically fill it.
+          This tool checks the availability of your nearest dental practices
+          taking on new patients using data from the NHS.
         </p>
         <PostcodeInput
           inputValue={postcode}
@@ -101,7 +101,7 @@ function App() {
           getGeolocation={getGeolocation}
         />
         {active && availableDentists.length === 0 && (
-          <p className="loading">Loading...</p>
+          <p className="loading">Checking nearest 50 dentists...</p>
         )}
         <DentistsList availableDentists={availableDentists} />
       </header>
