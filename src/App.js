@@ -100,6 +100,9 @@ function App() {
           error={error}
           getGeolocation={getGeolocation}
         />
+        {active && availableDentists.length === 0 && (
+          <p className="loading">Loading...</p>
+        )}
         <DentistsList availableDentists={availableDentists} />
       </header>
     </div>

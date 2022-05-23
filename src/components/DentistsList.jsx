@@ -3,7 +3,7 @@ import { Fragment } from "react";
 export const DentistsList = ({ availableDentists }) => {
   return (
     <Fragment>
-      {availableDentists.length > 0 ? (
+      {availableDentists.length > 0 && (
         <Fragment>
           <h3>Available Dentists</h3>
           <table>
@@ -23,7 +23,7 @@ export const DentistsList = ({ availableDentists }) => {
             </tbody>
           </table>
         </Fragment>
-      ) : null}
+      )}
     </Fragment>
   );
 };

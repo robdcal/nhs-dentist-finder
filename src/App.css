@@ -114,6 +114,13 @@ p.error {
   font-weight: 500;
   color: rgb(182, 0, 0);
 }
+p.loading {
+  margin-top: 2rem;
+}
+
+h3 {
+  margin-top: 2rem;
+}
 
 table {
   table-layout: fixed;
