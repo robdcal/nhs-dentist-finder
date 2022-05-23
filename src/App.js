@@ -63,7 +63,7 @@ function App() {
 
   const getDentists = () => {
     fetch(
-      `http://localhost:8888/.netlify/functions/scrape-dentists?` +
+      `/.netlify/functions/scrape-dentists?` +
         new URLSearchParams({
           postcode: postcode,
           lat: lat,
