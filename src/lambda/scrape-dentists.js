@@ -10,8 +10,12 @@ exports.handler = async function (event, context) {
 
     const page = await browser.newPage();
 
-    await page.setBypassCSP(true)
-    await page.goto('https://www.nhs.uk/service-search/other-services/Dentists/cw6-0tp/Results/12/-2.66510772705078/53.1611061096191/3/0?distance=25&ResultsOnPageValue=100&isNational=0');
+    // await page.setBypassCSP(true)
+    const postcode = event.queryStringParameters.postcode
+    const lat = event.queryStringParameters.lat
+    const lng = event.queryStringParameters.lng
+
+    await page.goto(`https://www.nhs.uk/service-search/other-services/Dentists/${postcode}/Results/12/${lng}/${lat}/3/0?distance=25&ResultsOnPageValue=50&isNational=0`);
 
     const dentistNames = await page.$$eval('tr th.fctitle', (dentists) => {
         return dentists.map(dentist => dentist.innerText);

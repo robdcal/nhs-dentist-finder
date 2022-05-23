@@ -1,9 +1,11 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PostcodeInput } from "./components/PostcodeInput";
 
 function App() {
   const [postcode, setPostcode] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
   const [dentists, setDentists] = useState([]);
   const [active, setActive] = useState(false);
   const [error, setError] = useState("");
@@ -26,18 +28,30 @@ function App() {
 
   const getGeolocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      fetch(
-        `https://api.postcodes.io/postcodes?lon=${position.coords.longitude}&lat=${position.coords.latitude}`
-      )
+      setLng(position.coords.longitude);
+      setLat(position.coords.latitude);
+    });
+  };
+
+  useEffect(() => {
+    if (lat) {
+      fetch(`https://api.postcodes.io/postcodes?lon=${lng}&lat=${lat}`)
         .then((response) => response.json())
         .then((data) => {
           setPostcode(data.result[0].postcode);
         });
-    });
-  };
+    }
+  }, [lat, lng]);
 
   const getDentists = () => {
-    fetch(`http://localhost:8888/.netlify/functions/scrape-dentists`)
+    fetch(
+      `http://localhost:8888/.netlify/functions/scrape-dentists?` +
+        new URLSearchParams({
+          postcode: postcode,
+          lat: lat,
+          lng: lng,
+        })
+    )
       .then((response) => response.json())
       .then((data) => {
         setDentists(data.dentistsList);
