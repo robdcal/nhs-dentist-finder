@@ -17,5 +17,8 @@ This project is designed to improve upon that experience, making it easier to fi
 - ~~Bring serverless function into the main project~~
 - ~~Make postcode in URL dynamic (pull from input field)~~
 - ~~get & display distance~~
-- improve 'active' animation (animate when dentist list displayed)
+- ~~improve 'active' animation (animate when dentist list displayed)~~
 - Debounce postcode input & lat/lng API calls
+- Handle errors
+- Scrape & display more info (link, address, phone number, parking availability, NHS.UK users rating)
+- Allow for scraping more (i.e. "scrape 50 more")
