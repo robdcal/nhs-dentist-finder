@@ -37,11 +37,27 @@ function App() {
   };
 
   useEffect(() => {
-    if (lat) {
+    if (lat && lng) {
       fetch(`https://api.postcodes.io/postcodes?lon=${lng}&lat=${lat}`)
-        .then((response) => response.json())
+        .then((response) => {
+          if (response.status !== 200) {
+            throw new Error(
+              "There was an issue converting your geolocation to a postcode. Please try again."
+            );
+          }
+          return response.json();
+        })
         .then((data) => {
+          if (!data.result) {
+            throw new Error(
+              "Geolocation not valid or recognised. Try again or manually enter a UK postcode."
+            );
+          }
           setPostcode(data.result[0].postcode);
+        })
+        .catch((error) => {
+          console.error(error);
+          setError(error.message);
         });
     }
   }, [lat, lng]);
@@ -50,16 +66,42 @@ function App() {
     if (postcode) {
       const debounce = setTimeout(() => {
         fetch(`https://api.postcodes.io/postcodes/${postcode}/validate`)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.result) {
-              return fetch(`https://api.postcodes.io/postcodes/${postcode}`);
+          .then((response) => {
+            if (response.status !== 200) {
+              throw new Error(
+                "There was an issue validating your postcode. Please try again."
+              );
             }
+            return response.json();
           })
-          .then((response) => response.json())
           .then((data) => {
+            if (!data.result) {
+              throw new Error(
+                "Postcode not valid or recognised. Please enter a valid UK postcode."
+              );
+            }
+            return fetch(`https://api.postcodes.io/postcodes/${postcode}`);
+          })
+          .then((response) => {
+            if (response.status !== 200) {
+              throw new Error(
+                "There was an issue retreiving geolocation data from your postcode. Please try again."
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (!data.result) {
+              throw new Error(
+                "There was an unexpected error when trying to get geolocation data from your postcode. Please try again."
+              );
+            }
             setLat(data.result.latitude);
             setLng(data.result.longitude);
+          })
+          .catch((error) => {
+            console.error(error);
+            setError(error.message);
           });
       }, 1500);
       return () => {
@@ -77,9 +119,25 @@ function App() {
           lng: lng,
         })
     )
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error(
+            "There was an issue gathering the data from the NHS website. Please try again."
+          );
+        }
+        return response.json();
+      })
       .then((data) => {
+        if (!data) {
+          throw new Error(
+            "No data was returned from the NHS website, possibly due to an error. Please try again later."
+          );
+        }
         setDentists(data.dentistsList);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error.message);
       });
   };
 
