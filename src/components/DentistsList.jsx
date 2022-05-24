@@ -1,11 +1,16 @@
 import { Fragment } from "react";
 
-export const DentistsList = ({ availableDentists }) => {
+export const DentistsList = ({ dentists, availableDentists }) => {
   return (
     <Fragment>
       {availableDentists.length > 0 && (
         <Fragment>
-          <h3>Available Dentists</h3>
+          <h3>
+            Out of the {dentists.length} nearest dentists to you,
+            {availableDentists.length} are accepting new adult NHS patients.
+          </h3>
+          <br />
+          <h4>Available Dentists</h4>
           <table>
             <thead>
               <tr>

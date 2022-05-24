@@ -103,7 +103,10 @@ function App() {
         {active && availableDentists.length === 0 && (
           <p className="loading">Checking nearest 50 dentists...</p>
         )}
-        <DentistsList availableDentists={availableDentists} />
+        <DentistsList
+          dentists={dentists}
+          availableDentists={availableDentists}
+        />
       </header>
     </div>
   );
