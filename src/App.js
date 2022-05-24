@@ -46,18 +46,23 @@ function App() {
 
   useEffect(() => {
     if (postcode) {
-      fetch(`https://api.postcodes.io/postcodes/${postcode}/validate`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.result) {
-            return fetch(`https://api.postcodes.io/postcodes/${postcode}`);
-          }
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          setLat(data.result.latitude);
-          setLng(data.result.longitude);
-        });
+      const debounce = setTimeout(() => {
+        fetch(`https://api.postcodes.io/postcodes/${postcode}/validate`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.result) {
+              return fetch(`https://api.postcodes.io/postcodes/${postcode}`);
+            }
+          })
+          .then((response) => response.json())
+          .then((data) => {
+            setLat(data.result.latitude);
+            setLng(data.result.longitude);
+          });
+      }, 1500);
+      return () => {
+        clearTimeout(debounce);
+      };
     }
   }, [postcode]);
 
