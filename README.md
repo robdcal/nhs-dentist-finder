@@ -18,7 +18,7 @@ This project is designed to improve upon that experience, making it easier to fi
 - ~~Make postcode in URL dynamic (pull from input field)~~
 - ~~get & display distance~~
 - ~~improve 'active' animation (animate when dentist list displayed)~~
-- Show count of unavailable / available
+- ~~Show count of unavailable / available~~
 - Filter to display available / unavailable
 - Debounce postcode input & lat/lng API calls
 - Handle errors
