@@ -12,8 +12,10 @@ function App() {
   const [error, setError] = useState("");
 
   const handleChange = (event) => {
-    setPostcode(event.target.value);
     setError("");
+    setLat("");
+    setLng("");
+    setPostcode(event.target.value);
   };
 
   const handleSubmit = (event) => {
