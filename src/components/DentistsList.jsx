@@ -1,6 +1,17 @@
-import { Fragment } from "react";
+import { useState, Fragment } from "react";
 
 export const DentistsList = ({ dentists, availableDentists }) => {
+  const [showUnavailable, setShowUnavailable] = useState(false);
+
+  const unavailableDentists = dentists.filter(
+    (dentist) => dentist.availability !== "Yes"
+  );
+
+  const toggleUnavailable = (event) => {
+    event.preventDefault();
+    setShowUnavailable(!showUnavailable);
+  };
+
   return (
     <Fragment>
       {availableDentists.length > 0 && (
@@ -27,6 +38,31 @@ export const DentistsList = ({ dentists, availableDentists }) => {
               ))}
             </tbody>
           </table>
+          <button onClick={toggleUnavailable}>
+            {showUnavailable ? "Hide unavailable" : "Show unavailable"}
+          </button>
+          {showUnavailable && (
+            <Fragment>
+              <br />
+              <h4>Unavailable Dentists</h4>
+              <table>
+                <thead>
+                  <tr>
+                    <td>Dentist Name</td>
+                    <td>Distance</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {unavailableDentists.map((dentist, index) => (
+                    <tr key={index}>
+                      <td>{dentist.name}</td>
+                      <td>{dentist.distance}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Fragment>
+          )}
         </Fragment>
       )}
     </Fragment>
