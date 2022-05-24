@@ -22,7 +22,7 @@ This project is designed to improve upon that experience, making it easier to fi
 - ~~Filter to display available / unavailable~~
 - ~~Debounce postcode input & lat/lng API calls~~
 - ~~Clear lat/lng when postcode input changes (i.e. user types)~~
-- Handle errors
+- ~~Handle errors~~
 - Scrape & display more info (link, address, phone number, parking availability, NHS.UK users rating)
 - Allow for scraping more (i.e. "scrape 50 more")
 - Show locations on Google Maps
