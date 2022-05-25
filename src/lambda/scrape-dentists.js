@@ -21,6 +21,10 @@ exports.handler = async function (event, context) {
         return dentists.map(dentist => dentist.innerText);
     });
 
+    const dentistLinks = await page.$$eval('tr th.fctitle a', (dentists) => {
+        return dentists.map(dentist => 'https://www.nhs.uk' + dentist.getAttribute('href'));
+    });
+
     const dentistDistance = await page.$$eval('tr td div p.fcdirections', (dentists) => {
         return dentists.map(dentist => dentist.innerText);
     });
@@ -32,6 +36,7 @@ exports.handler = async function (event, context) {
     const dentistsList = await dentistNames.map((dentist, index) => {
         return {
             name: dentist,
+            link: dentistLinks[index],
             distance: dentistDistance[index],
             availability: dentistAvailability[index],
         }

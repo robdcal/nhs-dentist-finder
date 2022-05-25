@@ -32,7 +32,9 @@ export const DentistsList = ({ dentists, availableDentists }) => {
             <tbody>
               {availableDentists.map((dentist, index) => (
                 <tr key={index}>
-                  <td>{dentist.name}</td>
+                  <td>
+                    <a href={dentist.link}>{dentist.name}</a>
+                  </td>
                   <td>{dentist.distance}</td>
                 </tr>
               ))}
@@ -55,7 +57,9 @@ export const DentistsList = ({ dentists, availableDentists }) => {
                 <tbody>
                   {unavailableDentists.map((dentist, index) => (
                     <tr key={index}>
-                      <td>{dentist.name}</td>
+                      <td>
+                        <a href={dentist.link}>{dentist.name}</a>
+                      </td>
                       <td>{dentist.distance}</td>
                     </tr>
                   ))}
