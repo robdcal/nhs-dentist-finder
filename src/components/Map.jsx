@@ -29,6 +29,8 @@ const render = (status) => {
       return <p>Error</p>;
     case Status.SUCCESS:
       return <GoogleMap />;
+    default:
+      return null;
   }
 };
 

@@ -2,7 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { PostcodeInput } from "./components/PostcodeInput";
 import { DentistsList } from "./components/DentistsList";
-import { Map } from "./components/Map";
+// import { Map } from "./components/Map";
 
 function App() {
   const [postcode, setPostcode] = useState("");
@@ -137,7 +137,7 @@ function App() {
           throw new Error(
             "No data was returned from the NHS website, possibly due to an error. Please try again later."
           );
-        } else if (data.dentistsList.length == 0) {
+        } else if (data.dentistsList.length === 0) {
           throw new Error(
             "There are no dentists within 50 miles of this postcode. Please enter a different postcode and try again."
           );
@@ -176,7 +176,7 @@ function App() {
         clearTimeout(debounce);
       };
     }
-  }, [pageNum]);
+  }, [pageNum, getDentists]);
 
   const headerStyling = {
     minHeight: active ? "40vh" : "100vh",
