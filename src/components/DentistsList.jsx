@@ -27,6 +27,7 @@ export const DentistsList = ({ dentists, availableDentists }) => {
               <tr>
                 <td>Dentist Name</td>
                 <td>Distance</td>
+                <td>Address</td>
               </tr>
             </thead>
             <tbody>
@@ -36,6 +37,7 @@ export const DentistsList = ({ dentists, availableDentists }) => {
                     <a href={dentist.link}>{dentist.name}</a>
                   </td>
                   <td>{dentist.distance}</td>
+                  <td>{dentist.address}</td>
                 </tr>
               ))}
             </tbody>
@@ -52,6 +54,7 @@ export const DentistsList = ({ dentists, availableDentists }) => {
                   <tr>
                     <td>Dentist Name</td>
                     <td>Distance</td>
+                    <td>Address</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -61,6 +64,7 @@ export const DentistsList = ({ dentists, availableDentists }) => {
                         <a href={dentist.link}>{dentist.name}</a>
                       </td>
                       <td>{dentist.distance}</td>
+                      <td>{dentist.address}</td>
                     </tr>
                   ))}
                 </tbody>
