@@ -33,6 +33,10 @@ exports.handler = async function (event, context) {
         return dentists.map(dentist => dentist.innerText.replace(/\n/g, ', '));
     });
 
+    const dentistTel = await page.$$eval('tr td .fcdetailsleft .fctel', (dentists) => {
+        return dentists.map(dentist => dentist.innerText.replace('Tel: ', ''));
+    });
+
     const dentistAvailability = await page.$$eval('td[headers*="acceptingnewadultnhspatients"] img', (dentists) => {
         return dentists.map(dentist => dentist.getAttribute('alt'));
     });
@@ -43,6 +47,7 @@ exports.handler = async function (event, context) {
             link: dentistLinks[index],
             distance: dentistDistance[index],
             address: dentistAddress[index],
+            tel: dentistTel[index],
             availability: dentistAvailability[index],
         }
     })
