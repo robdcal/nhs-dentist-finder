@@ -8,9 +8,8 @@ This project is designed to improve upon that experience, making it easier to fi
 
 - Scrape NHS website for data
 - Use browser geolocation and manual user input to get user's location
-- Use Google's Distance API to calculate distance from each dentist and order list by nearest
 - Filter list by options (available/unavailable, etc)
-- Show Google Map version of list with dentists plotted
+- Show dentists plotted on a map
 
 ## Todo
 
@@ -26,7 +25,7 @@ This project is designed to improve upon that experience, making it easier to fi
 - ~~Scrape & display more info (link, address, phone number)~~
 - ~~Allow for scraping more (i.e. "Find more" button)~~
 - ~~Handle an empty returned scraped data object (no nearby dentists, PH41 4PL)~~
-- Show locations on Google Maps
+- Show locations on a Google Map
 - Improve styling
 - Refactor data scraping functions to use one function and feed in target element
 - Scrape & display the remaining 4 types of "accepting patients"
