@@ -4,6 +4,8 @@ Finding a nearby dentist that's accepting new adult NHS patients isn't easy; bot
 
 This project is designed to improve upon that experience, making it easier to find one.
 
+[Try it out](https://nhs-dentist-finder.netlify.app/)
+
 ## Desired Features:
 
 - Scrape NHS website for data
