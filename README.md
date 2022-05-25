@@ -25,7 +25,7 @@ This project is designed to improve upon that experience, making it easier to fi
 - ~~Handle errors~~
 - ~~Scrape & display more info (link, address, phone number)~~
 - ~~Allow for scraping more (i.e. "Find more" button)~~
-- Handle an empty returned scraped data object (no nearby dentists, PH41 4PL)
+- ~~Handle an empty returned scraped data object (no nearby dentists, PH41 4PL)~~
 - Show locations on Google Maps
 - Improve styling
 - Refactor data scraping functions to use one function and feed in target element
