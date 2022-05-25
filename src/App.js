@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { PostcodeInput } from "./components/PostcodeInput";
 import { DentistsList } from "./components/DentistsList";
+import { Map } from "./components/Map";
 
 function App() {
   const [postcode, setPostcode] = useState("");
@@ -12,6 +13,7 @@ function App() {
   const [error, setError] = useState("");
   const [more, setMore] = useState(false);
   const [pageNum, setPageNum] = useState(1);
+  // const [showMap, setShowMap] = useState(false);
 
   const handleChange = (event) => {
     setError("");
@@ -196,9 +198,10 @@ function App() {
           error={error}
           getGeolocation={getGeolocation}
         />
-        {active && availableDentists.length === 0 && (
+        {active && dentists.length === 0 && (
           <p className="loading">Checking nearest 50 dentists...</p>
         )}
+        {/* <Map dentists={dentists} showMap={showMap} setShowMap={setShowMap} /> */}
         <DentistsList
           dentists={dentists}
           availableDentists={availableDentists}
