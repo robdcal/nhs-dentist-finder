@@ -25,8 +25,8 @@ This project is designed to improve upon that experience, making it easier to fi
 - ~~Scrape & display more info (link, address, phone number)~~
 - ~~Allow for scraping more (i.e. "Find more" button)~~
 - ~~Handle an empty returned scraped data object (no nearby dentists, PH41 4PL)~~
-- Show locations on a Google Map
 - Improve styling
+- Show locations on a Google Map
 - Refactor data scraping functions to use one function and feed in target element
 - Scrape & display the remaining 4 types of "accepting patients"
 - Scrape remaining info (parking availability, hearing loop availability, NHS.UK users rating)
