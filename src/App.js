@@ -176,7 +176,7 @@ function App() {
         clearTimeout(debounce);
       };
     }
-  }, [pageNum, getDentists]);
+  }, [pageNum]);
 
   const headerStyling = {
     minHeight: active ? "40vh" : "100vh",
