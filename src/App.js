@@ -135,11 +135,12 @@ function App() {
           throw new Error(
             "No data was returned from the NHS website, possibly due to an error. Please try again later."
           );
+        } else if (data.dentistsList.length == 0) {
+          throw new Error(
+            "There are no dentists within 50 miles of this postcode. Please enter a different postcode and try again."
+          );
         }
-        setDentists((currentFilteredProducts) => [
-          ...dentists,
-          ...data.dentistsList,
-        ]);
+        setDentists(() => [...dentists, ...data.dentistsList]);
         setMore(data.more);
       })
       .catch((error) => {
