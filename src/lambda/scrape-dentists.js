@@ -9,7 +9,8 @@ exports.handler = async function (event, context) {
         headless: true,
     });
 
-    let dentistsList
+    let dentistsList = []
+    let more = false
 
     try {
         const page = await browser.newPage();
@@ -18,8 +19,9 @@ exports.handler = async function (event, context) {
         const postcode = event.queryStringParameters.postcode
         const lat = event.queryStringParameters.lat
         const lng = event.queryStringParameters.lng
+        const pageNum = event.queryStringParameters.pageNum
 
-        await page.goto(`https://www.nhs.uk/service-search/other-services/Dentists/${postcode}/Results/12/${lng}/${lat}/3/0?distance=50&ResultsOnPageValue=50&isNational=0`);
+        await page.goto(`https://www.nhs.uk/service-search/other-services/Dentists/${postcode}/Results/12/${lng}/${lat}/3/0?distance=50&ResultsOnPageValue=50&isNational=0&currentPage=${pageNum}`);
 
         const dentistNames = await page.$$eval('tr th.fctitle', (dentists) => {
             return dentists.map(dentist => dentist.innerText);
@@ -56,9 +58,16 @@ exports.handler = async function (event, context) {
             }
         })
 
+        more = await page.$$eval('#btn_searchresults_next', (moreBtn) => {
+            return (moreBtn === undefined || moreBtn.length == 0) ? false : true
+        });
+
         await browser.close();
+
     } catch (error) {
+
         await browser.close();
+
     }
 
     return {
@@ -69,7 +78,8 @@ exports.handler = async function (event, context) {
         },
         body: JSON.stringify({
             status: 'Ok',
-            dentistsList
+            more: more,
+            dentistsList,
         })
     };
 }

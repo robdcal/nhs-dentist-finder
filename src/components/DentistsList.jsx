@@ -1,6 +1,11 @@
 import { useState, Fragment } from "react";
 
-export const DentistsList = ({ dentists, availableDentists }) => {
+export const DentistsList = ({
+  dentists,
+  availableDentists,
+  more,
+  searchMore,
+}) => {
   const [showUnavailable, setShowUnavailable] = useState(false);
 
   const unavailableDentists = dentists.filter(
@@ -46,6 +51,7 @@ export const DentistsList = ({ dentists, availableDentists }) => {
               ))}
             </tbody>
           </table>
+          {more && <button onClick={searchMore}>Search for more</button>}
           <button onClick={toggleUnavailable}>
             {showUnavailable ? "Hide unavailable" : "Show unavailable"}
           </button>

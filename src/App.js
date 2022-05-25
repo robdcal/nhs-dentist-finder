@@ -10,6 +10,8 @@ function App() {
   const [dentists, setDentists] = useState([]);
   const [active, setActive] = useState(false);
   const [error, setError] = useState("");
+  const [more, setMore] = useState(false);
+  const [pageNum, setPageNum] = useState(1);
 
   const handleChange = (event) => {
     setError("");
@@ -117,6 +119,7 @@ function App() {
           postcode: postcode,
           lat: lat,
           lng: lng,
+          pageNum: pageNum,
         })
     )
       .then((response) => {
@@ -133,7 +136,11 @@ function App() {
             "No data was returned from the NHS website, possibly due to an error. Please try again later."
           );
         }
-        setDentists(data.dentistsList);
+        setDentists((currentFilteredProducts) => [
+          ...dentists,
+          ...data.dentistsList,
+        ]);
+        setMore(data.more);
       })
       .catch((error) => {
         console.error(error);
@@ -144,6 +151,29 @@ function App() {
   const availableDentists = dentists.filter(
     (dentist) => dentist.availability === "Yes"
   );
+
+  const searchMore = () => {
+    setPageNum(pageNum + 1);
+  };
+
+  useEffect(() => {
+    if (pageNum > 1) {
+      const debounce = setTimeout(() => {
+        try {
+          getDentists();
+          setActive(true);
+        } catch (error) {
+          setError(
+            "There was an error finding more dentists. Please try again."
+          );
+          setActive(false);
+        }
+      }, 1500);
+      return () => {
+        clearTimeout(debounce);
+      };
+    }
+  }, [pageNum]);
 
   const headerStyling = {
     minHeight: active ? "40vh" : "100vh",
@@ -171,6 +201,8 @@ function App() {
         <DentistsList
           dentists={dentists}
           availableDentists={availableDentists}
+          more={more}
+          searchMore={searchMore}
         />
       </header>
     </div>
