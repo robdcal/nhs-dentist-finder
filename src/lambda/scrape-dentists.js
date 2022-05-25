@@ -3,56 +3,63 @@ const puppeteer = require('puppeteer-core');
 
 exports.handler = async function (event, context) {
     const browser = await puppeteer.launch({
-        args: chromium.args,
+        // args: chromium.args,
+        args: ['--single-process', '--no-zygote', '--no-sandbox'],
         executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath,
         headless: true,
     });
 
-    const page = await browser.newPage();
+    let dentistsList
 
-    // await page.setBypassCSP(true)
-    const postcode = event.queryStringParameters.postcode
-    const lat = event.queryStringParameters.lat
-    const lng = event.queryStringParameters.lng
+    try {
+        const page = await browser.newPage();
 
-    await page.goto(`https://www.nhs.uk/service-search/other-services/Dentists/${postcode}/Results/12/${lng}/${lat}/3/0?distance=50&ResultsOnPageValue=50&isNational=0`);
+        // await page.setBypassCSP(true)
+        const postcode = event.queryStringParameters.postcode
+        const lat = event.queryStringParameters.lat
+        const lng = event.queryStringParameters.lng
 
-    const dentistNames = await page.$$eval('tr th.fctitle', (dentists) => {
-        return dentists.map(dentist => dentist.innerText);
-    });
+        await page.goto(`https://www.nhs.uk/service-search/other-services/Dentists/${postcode}/Results/12/${lng}/${lat}/3/0?distance=50&ResultsOnPageValue=50&isNational=0`);
 
-    const dentistLinks = await page.$$eval('tr th.fctitle a', (dentists) => {
-        return dentists.map(dentist => 'https://www.nhs.uk' + dentist.getAttribute('href'));
-    });
+        const dentistNames = await page.$$eval('tr th.fctitle', (dentists) => {
+            return dentists.map(dentist => dentist.innerText);
+        });
 
-    const dentistDistance = await page.$$eval('tr td div p.fcdirections', (dentists) => {
-        return dentists.map(dentist => dentist.innerText);
-    });
+        const dentistLinks = await page.$$eval('tr th.fctitle a', (dentists) => {
+            return dentists.map(dentist => 'https://www.nhs.uk' + dentist.getAttribute('href'));
+        });
 
-    const dentistAddress = await page.$$eval('tr td .fcdetailsleft .fcaddress', (dentists) => {
-        return dentists.map(dentist => dentist.innerText.replace(/\n/g, ', '));
-    });
+        const dentistDistance = await page.$$eval('tr td div p.fcdirections', (dentists) => {
+            return dentists.map(dentist => dentist.innerText);
+        });
 
-    const dentistTel = await page.$$eval('tr td .fcdetailsleft .fctel', (dentists) => {
-        return dentists.map(dentist => dentist.innerText.replace('Tel: ', ''));
-    });
+        const dentistAddress = await page.$$eval('tr td .fcdetailsleft .fcaddress', (dentists) => {
+            return dentists.map(dentist => dentist.innerText.replace(/\n/g, ', '));
+        });
 
-    const dentistAvailability = await page.$$eval('td[headers*="acceptingnewadultnhspatients"] img', (dentists) => {
-        return dentists.map(dentist => dentist.getAttribute('alt'));
-    });
+        const dentistTel = await page.$$eval('tr td .fcdetailsleft .fctel', (dentists) => {
+            return dentists.map(dentist => dentist.innerText.replace('Tel: ', ''));
+        });
 
-    const dentistsList = await dentistNames.map((dentist, index) => {
-        return {
-            name: dentist,
-            link: dentistLinks[index],
-            distance: dentistDistance[index],
-            address: dentistAddress[index],
-            tel: dentistTel[index],
-            availability: dentistAvailability[index],
-        }
-    })
+        const dentistAvailability = await page.$$eval('td[headers*="acceptingnewadultnhspatients"] img', (dentists) => {
+            return dentists.map(dentist => dentist.getAttribute('alt'));
+        });
 
-    await browser.close();
+        dentistsList = await dentistNames.map((dentist, index) => {
+            return {
+                name: dentist,
+                link: dentistLinks[index],
+                distance: dentistDistance[index],
+                address: dentistAddress[index],
+                tel: dentistTel[index],
+                availability: dentistAvailability[index],
+            }
+        })
+
+        await browser.close();
+    } catch (error) {
+        await browser.close();
+    }
 
     return {
         statusCode: 200,
