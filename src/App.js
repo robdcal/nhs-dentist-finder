@@ -10,6 +10,7 @@ function App() {
   const [lng, setLng] = useState("");
   const [dentists, setDentists] = useState([]);
   const [active, setActive] = useState(false);
+  const [searching, setSearching] = useState(false);
   const [error, setError] = useState("");
   const [more, setMore] = useState(false);
   const [pageNum, setPageNum] = useState(1);
@@ -24,6 +25,7 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setDentists([]);
     try {
       getDentists();
       setActive(true);
@@ -142,8 +144,13 @@ function App() {
             "There are no dentists within 50 miles of this postcode. Please enter a different postcode and try again."
           );
         }
-        setDentists(() => [...dentists, ...data.dentistsList]);
+        setDentists(() =>
+          dentists.length === 0
+            ? data.dentistsList
+            : [...dentists, ...data.dentistsList]
+        );
         setMore(data.more);
+        setSearching(false);
       })
       .catch((error) => {
         console.error(error);
@@ -156,6 +163,7 @@ function App() {
   );
 
   const searchMore = () => {
+    setSearching(true);
     setPageNum(pageNum + 1);
   };
 
@@ -197,6 +205,7 @@ function App() {
           handleChange={handleChange}
           error={error}
           getGeolocation={getGeolocation}
+          active={active}
         />
         {active && dentists.length === 0 && (
           <p className="loading">Checking nearest 50 dentists...</p>
@@ -206,6 +215,7 @@ function App() {
           dentists={dentists}
           availableDentists={availableDentists}
           more={more}
+          searching={searching}
           searchMore={searchMore}
         />
       </header>

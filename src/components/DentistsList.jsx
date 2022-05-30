@@ -4,6 +4,7 @@ export const DentistsList = ({
   dentists,
   availableDentists,
   more,
+  searching,
   searchMore,
 }) => {
   const [showUnavailable, setShowUnavailable] = useState(false);
@@ -51,7 +52,11 @@ export const DentistsList = ({
               ))}
             </tbody>
           </table>
-          {more && <button onClick={searchMore}>Search for more</button>}
+          {more && (
+            <button onClick={searchMore} disabled={searching}>
+              {searching ? "Searching..." : "Search for more"}
+            </button>
+          )}
           <button onClick={toggleUnavailable}>
             {showUnavailable ? "Hide unavailable" : "Show unavailable"}
           </button>
