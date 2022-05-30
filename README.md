@@ -29,8 +29,8 @@ This project is designed to improve upon that experience, making it easier to fi
 - ~~Handle an empty returned scraped data object (no nearby dentists, PH41 4PL)~~
 - ~~When clicking "Show more", display an indicator to the user that something is happening in the background~~
 - ~~Disable "Find Dentists" button while an active search is ongoing~~
-- Resolve issue where a user clicks the Find Dentists button after a list is already displayed, and the list contents are duplicated
 - Improve styling
+- Resolve issue where a user clicks the Find Dentists button after a list is already displayed, and the list contents are duplicated
 - Show locations on a Google Map
 - Refactor data scraping functions to use one function and feed in target element
 - Scrape & display the remaining 4 types of "accepting patients"
