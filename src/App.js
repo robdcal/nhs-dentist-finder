@@ -26,6 +26,7 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setDentists([]);
+    setSearching(true);
     try {
       getDentists();
       setActive(true);
@@ -206,6 +207,7 @@ function App() {
           error={error}
           getGeolocation={getGeolocation}
           active={active}
+          searching={searching}
         />
         {active && dentists.length === 0 && (
           <p className="loading">Checking nearest 50 dentists...</p>

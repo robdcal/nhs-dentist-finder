@@ -3,6 +3,7 @@ export const PostcodeInput = ({
   inputValue,
   handleChange,
   error,
+  searching,
   getGeolocation,
 }) => {
   return (
@@ -19,7 +20,9 @@ export const PostcodeInput = ({
         />
         <br />
         <br />
-        <button>Find Dentists</button>
+        <button disabled={searching}>
+          {searching ? "Searching..." : "Find Dentists"}
+        </button>
       </form>
       {error && <p className="error">{error}</p>}
     </div>
