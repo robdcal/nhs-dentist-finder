@@ -5,40 +5,21 @@
 }
 
 body {
-  background: #f857a6; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #ff5858,
-    #f857a6
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #ff5858,
-    #f857a6
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-weight: 300;
-  font-size: 16px;
+  background-color: #efefef;
   min-height: 100vh;
+  color: #222222;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+body * {
+  font-family: "Quicksand", sans-serif;
 }
 
 h1 {
   font-size: 5rem;
   line-height: 5rem;
   margin-bottom: 1rem;
-}
-
-h2 {
-  font-size: 3rem;
-  line-height: 3rem;
-  margin-bottom: 1rem;
-}
-
-h3 {
-  font-size: 2rem;
-  line-height: 2rem;
-  margin-bottom: 0.75rem;
 }
 
 .App {
@@ -51,62 +32,70 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* height: 100vh; */
   text-align: center;
   transition: all 0.5s ease-in;
 }
 
-.hero h1 {
-  /* font-size: 4rem; */
+.title {
 }
 
-.hero p {
+.intro {
   margin-bottom: 4rem;
 }
 
-button {
-  padding: 0.5rem 1rem;
+.btn {
+  padding: 1rem 2rem;
   font-size: 1.25rem;
   border: none;
   color: white;
   background: black;
   cursor: pointer;
   transition: all 0.3s ease;
+  border-radius: 2rem;
 }
-button:hover {
+.btn:hover {
   background: white;
   color: black;
+}
+
+.btn-geolocate {
+  width: 2.5rem;
+  padding: 0.5rem;
+  margin-right: 1rem;
+  display: inline-block;
+}
+
+.btn-find {
+  display: block;
+  margin: 0 auto;
+}
+
+.btn-more {
+  margin-right: 1rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+}
+
+.btn-unavailable {
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+}
+
+.input-postcode {
+  max-width: 220px;
+  margin-bottom: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  border: none;
+  background: white;
 }
 
 form {
-  margin-bottom: 2rem;
-  display: inline;
-}
-
-form input,
-form button {
-  padding: 0.5rem 1rem;
-  font-size: 1.25rem;
-  border: none;
-  background: white;
-}
-
-form input {
-  /* border-radius: 0.5rem 0 0 0.5rem; */
-  min-width: 40%;
-}
-
-form button {
-  color: white;
-  background: black;
-  cursor: pointer;
-  /* border-radius: 0 0.5rem 0.5rem 0; */
-  transition: all 0.3s ease;
-}
-
-form button:hover {
-  background: white;
-  color: black;
+  margin-bottom: 4rem;
+  display: block;
 }
 
 p.error {
@@ -118,15 +107,54 @@ p.loading {
   margin-top: 2rem;
 }
 
-h3 {
-  margin-top: 2rem;
+.list-container {
+  display: none;
+  background-color: #e3e3e3;
+  padding: 2rem;
+}
+
+.list-container-active {
+  display: block;
+}
+
+.msg-count {
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.available,
+.unavailable {
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+
+.dentists {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 4rem;
+}
+.dentist {
+  background-color: #efefef;
+  padding: 1rem;
+  text-align: left;
+}
+.dentist-name {
+  font-size: 1.25rem;
+}
+.dentist-profile {
+}
+.dentist-distance {
+}
+.dentist-address {
+}
+.dentist-tel {
 }
 
 table {
   table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
-  border-top: 2px solid rgba(255, 255, 255, 0.5);
   margin-bottom: 4rem;
   text-align: left;
 }
@@ -135,21 +163,9 @@ table tr {
   border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-table tr:nth-of-type(1) {
-  border-top: none;
-}
-
 table td {
   word-wrap: break-word;
-  padding: 0.5rem 0;
-}
-
-table td:nth-of-type(1) {
-  /* width: 25%; */
-  /* font-weight: 600; */
-}
-table td:nth-of-type(2) {
-  /* padding-left: 1rem; */
+  padding: 0.5rem;
 }
 
 table thead tr td {

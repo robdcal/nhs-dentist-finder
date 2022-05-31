@@ -8,19 +8,20 @@ export const PostcodeInput = ({
 }) => {
   return (
     <div>
-      {"geolocation" in navigator ? (
-        <button onClick={getGeolocation}>Geolocate</button>
-      ) : null}
       <form action="submit" onSubmit={handleSubmit}>
+        {"geolocation" in navigator ? (
+          <a onClick={getGeolocation} className="btn btn-geolocate">
+            <i className="fa-solid fa-location-crosshairs"></i>
+          </a>
+        ) : null}
         <input
           type="text"
           placeholder="Enter postcode"
           value={inputValue}
           onChange={handleChange}
+          className="input-postcode"
         />
-        <br />
-        <br />
-        <button disabled={searching}>
+        <button disabled={searching} className="btn btn-find">
           {searching ? "Searching..." : "Find Dentists"}
         </button>
       </form>

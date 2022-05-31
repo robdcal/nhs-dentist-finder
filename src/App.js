@@ -195,10 +195,10 @@ function App() {
   return (
     <div className="App">
       <header className="hero" style={headerStyling}>
-        <h1>NHS Dentist Finder</h1>
-        <p>
-          This tool checks the availability of your nearest dental practices
-          taking on new patients using data from the NHS.
+        <h1 className="title">NHS Dentist Finder</h1>
+        <p className="intro">
+          Finding a dental practice near you that's accepting adult NHS patients
+          isn't always easy. Until now.
         </p>
         <PostcodeInput
           inputValue={postcode}
