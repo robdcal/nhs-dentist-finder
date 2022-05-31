@@ -30,6 +30,7 @@ This project is designed to improve upon that experience, making it easier to fi
 - ~~When clicking "Show more", display an indicator to the user that something is happening in the background~~
 - ~~Disable "Find Dentists" button while an active search is ongoing~~
 - Improve styling
+- Handle when a user clicks the Find button without entering a postcode
 - Resolve issue where a user clicks the Find Dentists button after a list is already displayed, and the list contents are duplicated
 - Show locations on a Google Map
 - Refactor data scraping functions to use one function and feed in target element
