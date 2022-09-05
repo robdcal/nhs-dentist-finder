@@ -46,7 +46,7 @@ export const Map = ({ dentists, showMap, setShowMap }) => {
       )}
       {showMap && (
         <Wrapper
-          apiKey={"AIzaSyD9us5-KPcxFi3yIllxjMRn4y2qyWw8qn4"}
+          apiKey={process.env.GOOGLE_MAPS_API_KEY}
           render={render}
           zoom={zoom}
         />
